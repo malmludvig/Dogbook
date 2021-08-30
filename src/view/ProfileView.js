@@ -21,10 +21,7 @@ export const ProfileView = () => {
     str = str.substring(str.indexOf("e") + 2);
 
 
-
-
-
-
+    //Skapa tillfälliga variabler av hundens object som skrivs ut på profilsidan
     let dogIdVar, nameVar, nickVar, ageVar, bioVar, homeVar, friendListVar
     for (var i in stored_datas) {
         if (stored_datas[i].name === str) {
@@ -39,28 +36,23 @@ export const ProfileView = () => {
         }
       }
 
-      let newArray = friendListVar.map((item, index) => (
+      let friendIds = friendListVar.map((item, index) => (
           
         stored_datas.find(x => x.dogId === item)
 
         ))
 
-        console.log(newArray)
 
-        const sweeterArray = newArray.map(sweetItem => {
-            return sweetItem.name
+        //Får problem om det är undefined
+        const friendNames = friendIds.map(item => {
+            return item.name
         })
-
-        console.log(sweeterArray)
-
 
     return (
         <div>
 
-
             <h1>This is the Profile View!</h1>
             <img className="profileImg" src={"https://dog.ceo/api/breeds/image/random"} alt="" />
- 
             <table>
   <tr>
     <th>Dog</th>
@@ -93,18 +85,14 @@ export const ProfileView = () => {
     <td>Friend list:</td>
     <td>
         
-    {sweeterArray.map((item, index) => (
+    {friendNames.map((item, index) => (
                 <div key={index}>
                 
                 {item}
 
                 <br/></div>
 ))}
-    
-    
-    
-    
-
+ 
     </td>
   </tr>
 </table>

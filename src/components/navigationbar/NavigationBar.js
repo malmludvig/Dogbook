@@ -20,7 +20,7 @@ export const NavigationBar = () => {
                 "age": 4,
                 "bio": "I like to bark at old people!",
                 "home": "true",
-                "friendList": [2, 3],
+                "friendList": [2, 3, 5],
 
             },
             {
@@ -30,7 +30,7 @@ export const NavigationBar = () => {
                 "age": 2,
                 "bio": "Woff woff. That's what I tell 'em.",
                 "home": "false",
-                "friendList": [1],
+                "friendList": [1, 5],
             },
             {
                 "dogId": 3, 
@@ -39,7 +39,7 @@ export const NavigationBar = () => {
                 "age": 9,
                 "bio": "Grrrraaaaaaw! I sound just like chewbacca",
                 "home": "true",
-                "friendList": [1],
+                "friendList": [1,5],
             },
             {
 
@@ -49,7 +49,17 @@ export const NavigationBar = () => {
                 "age": 14,
                 "bio": "I love my owner sp much! His name is Petterfjärt.",
                 "home": "true",
-                "friendList": [],
+                "friendList": [5],
+            },
+            {
+
+                "dogId": 5, 
+                "name": "Huffy",
+                "nick": "Hufflepuff",
+                "age": 2,
+                "bio": "Everyone thinks I am named after the Harry Potter name.",
+                "home": "false",
+                "friendList": [1, 2, 3, 4],
             }
             ]
 

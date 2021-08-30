@@ -13,7 +13,7 @@ export const SignInView = () => {
         let datas = [
             {
                 "dogId": 1, 
-                "name": "Fido",
+                "name": "Fidso",
                 "nick": "fidde",
                 "age": 4,
                 "bio": "I like to bark at old people!",
@@ -48,6 +48,16 @@ export const SignInView = () => {
                 "bio": "I love my owner sp much! His name is Petterfjärt.",
                 "home": "true",
                 "friendList": [],
+            },
+            {
+
+                "dogId": 5, 
+                "name": "Huffy",
+                "nick": "Hufflepuff",
+                "age": 2,
+                "bio": "Everyone thinks I am named after the Harry Potter name.",
+                "home": "false",
+                "friendList": [1, 2, 3, 4],
             }
             ]
 
@@ -58,7 +68,7 @@ export const SignInView = () => {
 
     return (
         <div>
-            <button onClick={() => createDog()}>Create dogs</button>
+            <button onClick={() => createDog()}>Create sdogs</button>
         </div>
 
     )
