@@ -1,0 +1,28 @@
+.navigationBarWrapper {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    background-color:rgb(87, 230, 255)
+}
+
+.logotype a:hover {
+    cursor:pointer;
+    background-color: yellow;
+    font-size: 110%;
+}
+
+
+.signIn {
+    grid-column: 9/10;
+    align-self: center;
+    font-size: 200%;
+}
+
+.logotype, .signIn {
+    cursor: pointer;
+}
+
+.profile {
+    grid-column: 9/10;
+    align-self: center;
+    font-size: 200%;
+}
