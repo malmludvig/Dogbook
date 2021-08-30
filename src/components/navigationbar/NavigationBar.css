@@ -10,14 +10,13 @@
     font-size: 110%;
 }
 
-
-.signIn {
+.createDogs {
     grid-column: 9/10;
     align-self: center;
     font-size: 140%;
 }
 
-.logotype, .signIn {
+.logotype, .createDogs {
     cursor: pointer;
 }
 

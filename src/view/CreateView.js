@@ -1,43 +1,69 @@
 import React, {useState, useContext } from 'react'
-import { UserContext } from '../shared/global/provider/UserProvider'
 import { useHistory} from 'react-router-dom'
 
 var stored_datas = JSON.parse(localStorage["datas"]);
 
-export const SignInView = () => {
+
+
+
+
+export const CreateView = () => {
+
     const history = useHistory()
     const [name, setName] = useState("");
     const [nick, setNick] = useState("");
     const [age, setAge] = useState("");
     const [bio, setBio] = useState("");
     const [home, setHome] = useState("");
-    const [asdd, setNadme] = useState("");
+    const [url, setUrl] = useState("");
+
+ let highestId = 0
+  for (var i in stored_datas) {
+    if(stored_datas[i].dogId > highestId)
+      highestId = stored_datas[i].dogId + 1
+    
+  }
+  console.log("Högsta ID")
+  console.log(highestId)
+
+
+
+
 
     const newObject =             {
-        "dogId": 10, 
         "name": "Fidoran",
         "nick": "fidde",
         "age": 4,
-        "bio": "I like to bark at old people!",
-        "home": "true",
+        "bio": "",
+        "home": "false",
         "friendList": [],
-        "img": "https://images.dog.ceo/breeds/mastiff-bull/n02108422_2678.jpg"
+        "img": ""
 
     }
 
+    if (!url) {
+      fetch("https://dog.ceo/api/breeds/image/random")
+        .then((res) => res.json())
+        .then((data) => {
+          setUrl(data.message);
+        })
+        .catch(console.log);
+    }
+    
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        newObject.dogId = highestId
         newObject.name = name
         newObject.nick = nick
         newObject.age = age
         newObject.bio = bio
-
+        newObject.img = url
+        
         stored_datas.push(newObject)
         localStorage["datas"] = JSON.stringify(stored_datas);
 
         history.push(`/`);
-
-
     }
 
     console.log(stored_datas)
@@ -48,7 +74,7 @@ export const SignInView = () => {
 
 <table>
   <tr>
-    <th>Dog</th>
+    <th>Create new dog</th>
   </tr>
   <tr>
     <td>Name:</td>
@@ -91,30 +117,12 @@ export const SignInView = () => {
       </label></td>
   </tr>
   <tr>
-    <td>HomeOrNot:</td>
-    <td><label>
-        <input
-          type="checkbox"
-          value={name}
-          onChange={e => setHome(e.target.value)}
-        />
-      </label></td>
   </tr>
 
 </table>
 
 <input type="submit" value="Submit" />
     </form>
-
-<h1>Dogs:</h1>
-            
-            {stored_datas.map((item, index) => (
-                <div key={index}>
-                
-                 <a className="profileLink" onClick={() => history.push(`/profile/${item.name}`)} >@{item.name}</a> 
-
-                <br/></div>
-))}
 
 </>
     )

@@ -1,16 +1,11 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../shared/global/provider/UserProvider'
+import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
-
-
 
 export const HomeView = () => {
 
-    const history = useHistory();
 
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
+    const history = useHistory();
     var stored_datas = JSON.parse(localStorage["datas"]);
-    console.log(stored_datas)
 
     for (let i = 0; i < stored_datas.length; i++) {
 
@@ -47,8 +42,8 @@ export const HomeView = () => {
 
     //Ta bort alla värden i Fidos.friendList
 
-
-
+      // Fetch Dog Image Via 3rd party api - randomly
+  
     const deleteDog = (id, name) => {
 
         //Ta bort object från array med specifikt index.
@@ -70,16 +65,9 @@ export const HomeView = () => {
 
     }
 
-
-    const goToProfile = (item) => {
-
-        history.push(`/profile/${stored_datas[item].name}`);
-
-    }
-
-
     return (
         <div>
+            
         <h1>Dogs:</h1>
             
             {stored_datas.map((item, index) => (
@@ -89,7 +77,7 @@ export const HomeView = () => {
 
                 <br/></div>
 ))}<br/>
-                        <a></a><span onClick={()=> history.push('/signin')}>Create new dog</span>
+                        <a></a><span onClick={()=> history.push('/createview')}>Create new dog</span>
 
         </div>
     )

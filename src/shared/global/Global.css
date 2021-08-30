@@ -17,7 +17,6 @@ table, th, td {
     
     text-decoration: underline;
     cursor: pointer;
-
 }
 
 .createDogLink {
@@ -29,14 +28,10 @@ table, th, td {
     
     text-decoration: underline;
     cursor: pointer;
-
 }
 
 .profileImg {
     width: 20vh;
     border-radius: 50%;
     grid-column: 1/5;
-    
-    }
-
-
+}

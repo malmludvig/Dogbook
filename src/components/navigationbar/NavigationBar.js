@@ -1,22 +1,19 @@
-import React, { useContext } from 'react'
 import './NavigationBar.css'
 import { useHistory } from 'react-router-dom'
-import { UserContext } from '../../shared/global/provider/UserProvider'
 
 export const NavigationBar = () => {
     const history = useHistory();
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
 
-    const createDog = () => {
+    const createTemplateDogs = () => {
 
-        let datas = [
+        let templateData = [
             {
                 "dogId": 1, 
                 "name": "Fido",
-                "nick": "fidde",
+                "nick": "Fidde",
                 "age": 4,
                 "bio": "I like to bark at old people!",
-                "home": "true",
+                "home": true,
                 "friendList": [2, 3, 5],
                 "img": "https://images.dog.ceo/breeds/malamute/n02110063_3853.jpg"
 
@@ -27,7 +24,7 @@ export const NavigationBar = () => {
                 "nick": "Doggy",
                 "age": 2,
                 "bio": "Woff woff. That's what I tell 'em.",
-                "home": "false",
+                "home": false,
                 "friendList": [1, 5],
                 "img": "https://images.dog.ceo/breeds/husky/n02110185_4677.jpg"
 
@@ -38,7 +35,7 @@ export const NavigationBar = () => {
                 "nick": "Gubben",
                 "age": 9,
                 "bio": "Grrrraaaaaaw! I sound just like chewbacca",
-                "home": "true",
+                "home": true,
                 "friendList": [1,5],
                 "img": "https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg"
             },
@@ -48,8 +45,8 @@ export const NavigationBar = () => {
                 "name": "James",
                 "nick": "Jamstrams",
                 "age": 14,
-                "bio": "I love my owner sp much! His name is Petterfjärt.",
-                "home": "true",
+                "bio": "I love my owner so much! His name is Petterfjärt.",
+                "home": true,
                 "friendList": [5],
                 "img": "https://images.dog.ceo/breeds/bulldog-boston/n02096585_2560.jpg"
             },
@@ -60,13 +57,13 @@ export const NavigationBar = () => {
                 "nick": "Hufflepuff",
                 "age": 2,
                 "bio": "Everyone thinks I am named after the Harry Potter name.",
-                "home": "false",
+                "home": false,
                 "friendList": [1, 2, 3, 4],
                 "img": "https://images.dog.ceo/breeds/shiba/shiba-15.jpg"
             }
             ]
 
-        localStorage["datas"] = JSON.stringify(datas);
+        localStorage["datas"] = JSON.stringify(templateData);
         history.push('/')
 
     }
@@ -74,8 +71,7 @@ export const NavigationBar = () => {
     return(
         <div className="navigationBarWrapper">
             <h1 className="logotype" onClick={()=> history.push('/')}>DogBook</h1>
-            <span  onClick={() => createDog()} className="signIn">Create template dogs</span>         
-
+            <span  onClick={() => createTemplateDogs()} className="createDogs">Create template dogs</span>         
         </div>
     )
 }
