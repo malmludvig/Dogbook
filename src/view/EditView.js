@@ -27,7 +27,6 @@ export const EditView = () => {
           }
         }
 
-console.log(nameVar)
 
   const history = useHistory()
   
@@ -39,7 +38,7 @@ console.log(nameVar)
     const [home, setHome] = useState(homeVar);
     const [friends, setFriends] = useState(friendListVar);
     const [img, setImg] = useState(imageVar);
-    const [newFriend, setNewFriend] = useState();
+    const [newFriend, setNewFriend] = useState(undefined);
 
 
 
@@ -97,32 +96,62 @@ console.log(nameVar)
 
   }
 
+
+
   const addNewFriend = () => {
   
-    if(newFriend !== undefined)
+    if(newFriend !== undefined){
 
+      console.log("Nuvarande hunds id")
+      console.log(id)
+      console.log("Nuvarande hunds plats i array")
+      console.log(indexTracker)
+
+
+      let friendId;
+            for (var i in stored_datas) {
+              if (stored_datas[i].name === newFriend) {
+      
+                friendId = stored_datas[i].dogId
+              }
+            }
+            console.log("Option hund id:")
+            console.log(friendId)
     
+            let indexTrackerForNewFriend
+            for (var i in stored_datas) {
+              if (stored_datas[i].dogId === friendId) {
+        
+                indexTrackerForNewFriend = i
+              }
+            }
+
+            console.log("Option hund plats i array:")
+            console.log(indexTrackerForNewFriend)
+
+            stored_datas[indexTracker].friendList.push(friendId)
+            stored_datas[indexTrackerForNewFriend].friendList.push(id)
+            localStorage["datas"] = JSON.stringify(stored_datas);
+            setNewFriend(undefined)
+            window.location.reload();
+
+          }
+
+
+
     //Hämta Id av hund som finns på adda dropdown
 
     //Lägg till id av ny hund i nuvarande hunds lista
 
-
     //Lägg till id av nuvarande hund i nya vännens vänlista
 
-    console.log("option:")
-    console.log(newFriend)
-
-
-    alert("En ny vän har addats")
   }
-
-  
-
-
 
     const newObject = {}
 
     const  handleSubmit = (evt) => {
+
+      
 
       evt.preventDefault();
       newObject.dogId = id
@@ -143,12 +172,10 @@ console.log(nameVar)
       stored_datas[indexTracker] = newObject;
       localStorage["datas"] = JSON.stringify(stored_datas);
 
+      addNewFriend()
       history.push(`/`);
 
   }
-
-  
- 
 
       let friendIds = friendListVar.map((item, index) => (
           
@@ -164,7 +191,6 @@ console.log(nameVar)
     return (
         <div>
 
-          <button onClick={() => addNewFriend()}>Klicka för att testa min option-funktion</button>
 
             <h1>{nameVar}'s profile</h1>
             <img className="profileImg" src={imageVar} alt="" />
