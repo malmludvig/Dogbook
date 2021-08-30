@@ -13,9 +13,7 @@ export const HomeView = () => {
     console.log(stored_datas)
 
     for (let i = 0; i < stored_datas.length; i++) {
-        console.log(stored_datas[i].name)
 
-        console.log(stored_datas[i].friendList)
     }
 
     
@@ -60,8 +58,7 @@ export const HomeView = () => {
             const temp1 = stored_datas[i].friendList
             const temp2 = temp1.filter(x => x !== id);
     
-            console.log(stored_datas[i].name + " vänner :")
-            console.log(temp2)
+
             stored_datas[i].friendList = temp2
           }
 
@@ -91,8 +88,9 @@ export const HomeView = () => {
                  <a className="profileLink" onClick={() => history.push(`/profile/${item.name}`)} >@{item.name}</a> <a onClick={() => deleteDog(item.dogId, item.name)} className="profileLink">[x]</a>
 
                 <br/></div>
-))}
-            
+))}<br/>
+                        <a></a><span onClick={()=> history.push('/signin')}>Create new dog</span>
+
         </div>
     )
 }

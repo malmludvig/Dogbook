@@ -6,6 +6,7 @@ import {SignInView} from '../view/SignInView'
 import {UserContext} from '../shared/global/provider/UserProvider'
 import {ProfileView} from '../view/ProfileView'
 import {SettingsView} from '../view/SettingsView'
+import {EditView} from '../view/EditView'
 
 
 export const Routing = (props) => {
@@ -20,8 +21,6 @@ export const Routing = (props) => {
         checkIfUserIsAuthenticatedInBrowser()
     }, [])
 
-
-
     return(
         <Router>
             {props.children}
@@ -30,12 +29,12 @@ export const Routing = (props) => {
                 <Route exact path="/signin" component={SignInView} />
                 <Route path="/profile" component={ProfileView} />
                 <Route exact path="/settings" component={SettingsView} />
+                <Route path="/editview" component={EditView} />
+
                 <Route component={HomeView} />
                 
             </Switch>
         </Router>
-
-
 
     )
 }

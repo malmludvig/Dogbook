@@ -100,30 +100,7 @@ export const SignInView = () => {
         />
       </label></td>
   </tr>
-  <tr>
-    <td>Friends:</td>
-    <td>
-    <input
-          type="checkbox"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />Prime<br/>        
-        <input
-        type="checkbox"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />Douglas <br/><input
-      type="checkbox"
-      value={name}
-      onChange={e => setName(e.target.value)}
-    />Fido
 
-    </td>
-
-    <td>
-        
-    </td>
-  </tr>
 </table>
 
 <input type="submit" value="Submit" />

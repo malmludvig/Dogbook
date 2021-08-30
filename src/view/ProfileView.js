@@ -14,6 +14,8 @@ export const ShowFriends = () => {
 
 export const ProfileView = () => {
 
+  const history = useHistory();
+
     const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
     var stored_datas = JSON.parse(localStorage["datas"]);
 
@@ -33,8 +35,6 @@ export const ProfileView = () => {
           homeVar = stored_datas[i].home; 
           friendListVar = stored_datas[i].friendList; 
           imageVar = stored_datas[i].img; 
-
-
         }
       }
 
@@ -43,7 +43,6 @@ export const ProfileView = () => {
         stored_datas.find(x => x.dogId === item)
 
         ))
-
 
         //Får problem om det är undefined
         const friendNames = friendIds.map(item => {
@@ -98,6 +97,8 @@ export const ProfileView = () => {
   </tr>
 </table>
 
+
+<a><span className="profileLink" onClick={()=> history.push(`/editview/${nameVar}`)}>Edit dog</span></a>
         </div>
     )
 }

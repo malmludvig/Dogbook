@@ -20,4 +20,23 @@ table, th, td {
 
 }
 
+.createDogLink {
+    
+    color:blue;
+}
+
+.createDogLink:hover {
+    
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.profileImg {
+    width: 20vh;
+    border-radius: 50%;
+    grid-column: 1/5;
+    
+    }
+
 

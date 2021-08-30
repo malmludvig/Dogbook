@@ -1,14 +1,11 @@
 import React, { useContext } from 'react'
 import './NavigationBar.css'
-import LogoType from '../../shared/images/logotype.png'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../../shared/global/provider/UserProvider'
-import { Profile } from '../profile/Profile'
 
 export const NavigationBar = () => {
     const history = useHistory();
     const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
-
 
     const createDog = () => {
 
@@ -74,20 +71,10 @@ export const NavigationBar = () => {
 
     }
 
-
-
-
-
-
-
-
- 
-
     return(
         <div className="navigationBarWrapper">
             <h1 className="logotype" onClick={()=> history.push('/')}>DogBook</h1>
-            <span onClick={()=> history.push('/signin')}>Create new dog</span>
-            <span  onClick={() => createDog()} className="signIn">Create dogs</span>         
+            <span  onClick={() => createDog()} className="signIn">Create template dogs</span>         
 
         </div>
     )
