@@ -3,12 +3,14 @@ import { UserContext } from '../shared/global/provider/UserProvider'
 import { useHistory } from 'react-router-dom'
 
 
+
 export const HomeView = () => {
 
     const history = useHistory();
 
     const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
     var stored_datas = JSON.parse(localStorage["datas"]);
+    console.log(stored_datas)
 
     for (let i = 0; i < stored_datas.length; i++) {
         console.log(stored_datas[i].name)
@@ -51,9 +53,6 @@ export const HomeView = () => {
 
     const deleteDog = (id, name) => {
 
-
-
-
         //Ta bort object från array med specifikt index.
 
         for (let i = 0; i < stored_datas.length; i++) {
@@ -66,15 +65,11 @@ export const HomeView = () => {
             stored_datas[i].friendList = temp2
           }
 
-
         const removeIndex = stored_datas.findIndex( item => item.dogId === id );
         stored_datas.splice( removeIndex, 1 );
 
         localStorage["datas"] = JSON.stringify(stored_datas);
         window.location.reload();
-
-        alert(name + " has been deleted.");
-
 
     }
 

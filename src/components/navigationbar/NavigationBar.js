@@ -21,6 +21,7 @@ export const NavigationBar = () => {
                 "bio": "I like to bark at old people!",
                 "home": "true",
                 "friendList": [2, 3, 5],
+                "img": "https://images.dog.ceo/breeds/malamute/n02110063_3853.jpg"
 
             },
             {
@@ -31,6 +32,8 @@ export const NavigationBar = () => {
                 "bio": "Woff woff. That's what I tell 'em.",
                 "home": "false",
                 "friendList": [1, 5],
+                "img": "https://images.dog.ceo/breeds/husky/n02110185_4677.jpg"
+
             },
             {
                 "dogId": 3, 
@@ -40,6 +43,7 @@ export const NavigationBar = () => {
                 "bio": "Grrrraaaaaaw! I sound just like chewbacca",
                 "home": "true",
                 "friendList": [1,5],
+                "img": "https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg"
             },
             {
 
@@ -50,6 +54,7 @@ export const NavigationBar = () => {
                 "bio": "I love my owner sp much! His name is Petterfjärt.",
                 "home": "true",
                 "friendList": [5],
+                "img": "https://images.dog.ceo/breeds/bulldog-boston/n02096585_2560.jpg"
             },
             {
 
@@ -60,6 +65,7 @@ export const NavigationBar = () => {
                 "bio": "Everyone thinks I am named after the Harry Potter name.",
                 "home": "false",
                 "friendList": [1, 2, 3, 4],
+                "img": "https://images.dog.ceo/breeds/shiba/shiba-15.jpg"
             }
             ]
 
@@ -80,7 +86,7 @@ export const NavigationBar = () => {
     return(
         <div className="navigationBarWrapper">
             <h1 className="logotype" onClick={()=> history.push('/')}>DogBook</h1>
-            
+            <span onClick={()=> history.push('/signin')}>Create new dog</span>
             <span  onClick={() => createDog()} className="signIn">Create dogs</span>         
 
         </div>

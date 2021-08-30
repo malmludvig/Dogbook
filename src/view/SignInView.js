@@ -2,74 +2,143 @@ import React, {useState, useContext } from 'react'
 import { UserContext } from '../shared/global/provider/UserProvider'
 import { useHistory} from 'react-router-dom'
 
+var stored_datas = JSON.parse(localStorage["datas"]);
+
 export const SignInView = () => {
     const history = useHistory()
-    const [dogname, setDogname] = useState()
-    const [password, setPassword] = useState()
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
+    const [name, setName] = useState("");
+    const [nick, setNick] = useState("");
+    const [age, setAge] = useState("");
+    const [bio, setBio] = useState("");
+    const [home, setHome] = useState("");
+    const [asdd, setNadme] = useState("");
 
-    const createDog = () => {
-
-        let datas = [
-            {
-                "dogId": 1, 
-                "name": "Fidso",
-                "nick": "fidde",
-                "age": 4,
-                "bio": "I like to bark at old people!",
-                "home": "true",
-                "friendList": [2, 3],
-
-            },
-            {
-                "dogId": 2, 
-                "name": "Douglas",
-                "nick": "Doggy",
-                "age": 2,
-                "bio": "Woff woff. That's what I tell 'em.",
-                "home": "false",
-                "friendList": [1],
-            },
-            {
-                "dogId": 3, 
-                "name": "Prime",
-                "nick": "Gubben",
-                "age": 9,
-                "bio": "Grrrraaaaaaw! I sound just like chewbacca",
-                "home": "true",
-                "friendList": [1],
-            },
-            {
-
-                "dogId": 4, 
-                "name": "James",
-                "nick": "Jamstrams",
-                "age": 14,
-                "bio": "I love my owner sp much! His name is Petterfjärt.",
-                "home": "true",
-                "friendList": [],
-            },
-            {
-
-                "dogId": 5, 
-                "name": "Huffy",
-                "nick": "Hufflepuff",
-                "age": 2,
-                "bio": "Everyone thinks I am named after the Harry Potter name.",
-                "home": "false",
-                "friendList": [1, 2, 3, 4],
-            }
-            ]
-
-        localStorage["datas"] = JSON.stringify(datas);
-        history.push('/')
+    const newObject =             {
+        "dogId": 10, 
+        "name": "Fidoran",
+        "nick": "fidde",
+        "age": 4,
+        "bio": "I like to bark at old people!",
+        "home": "true",
+        "friendList": [],
+        "img": "https://images.dog.ceo/breeds/mastiff-bull/n02108422_2678.jpg"
 
     }
 
-    return (
-        <div>
-            <button onClick={() => createDog()}>Create sdogs</button>
-        </div>
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        newObject.name = name
+        newObject.nick = nick
+        newObject.age = age
+        newObject.bio = bio
 
+        stored_datas.push(newObject)
+        localStorage["datas"] = JSON.stringify(stored_datas);
+
+        history.push(`/`);
+
+
+    }
+
+    console.log(stored_datas)
+
+    return (
+        <>
+<form onSubmit={handleSubmit}>
+
+<table>
+  <tr>
+    <th>Dog</th>
+  </tr>
+  <tr>
+    <td>Name:</td>
+    <td><label>
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </label></td>
+  </tr>
+  <tr>
+    <td>Nick:</td>
+    <td><label>
+        <input
+          type="text"
+          value={nick}
+          onChange={e => setNick(e.target.value)}
+        />
+      </label></td>
+  </tr>
+  <tr>
+    <td>Age:</td>
+    <td><label>
+        <input
+          type="text"
+          value={age}
+          onChange={e => setAge(e.target.value)}
+        />
+      </label></td>
+  </tr>
+  <tr>
+    <td>Bio:</td>
+    <td><label>
+        <input
+          type="text"
+          value={bio}
+          onChange={e => setBio(e.target.value)}
+        />
+      </label></td>
+  </tr>
+  <tr>
+    <td>HomeOrNot:</td>
+    <td><label>
+        <input
+          type="checkbox"
+          value={name}
+          onChange={e => setHome(e.target.value)}
+        />
+      </label></td>
+  </tr>
+  <tr>
+    <td>Friends:</td>
+    <td>
+    <input
+          type="checkbox"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />Prime<br/>        
+        <input
+        type="checkbox"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />Douglas <br/><input
+      type="checkbox"
+      value={name}
+      onChange={e => setName(e.target.value)}
+    />Fido
+
+    </td>
+
+    <td>
+        
+    </td>
+  </tr>
+</table>
+
+<input type="submit" value="Submit" />
+    </form>
+
+<h1>Dogs:</h1>
+            
+            {stored_datas.map((item, index) => (
+                <div key={index}>
+                
+                 <a className="profileLink" onClick={() => history.push(`/profile/${item.name}`)} >@{item.name}</a> 
+
+                <br/></div>
+))}
+
+</>
     )
 }
