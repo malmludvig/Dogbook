@@ -1,44 +1,34 @@
-import React, {useState, useContext } from 'react'
+import React, {useState} from 'react'
 import { useHistory} from 'react-router-dom'
 
-var stored_datas = JSON.parse(localStorage["datas"]);
-
-
-
-
-
 export const CreateView = () => {
+  
+    if (localStorage.getItem('datas') === null) 
+    {
+        let emptyArray = []
+        localStorage["datas"] = JSON.stringify(emptyArray);
+    } 
+
+    var stored_datas = JSON.parse(localStorage["datas"]);
 
     const history = useHistory()
     const [name, setName] = useState("");
     const [nick, setNick] = useState("");
     const [age, setAge] = useState("");
     const [bio, setBio] = useState("");
-    const [home, setHome] = useState("");
     const [url, setUrl] = useState("");
 
- let highestId = 0
+ let uniqueId = 0
   for (var i in stored_datas) {
-    if(stored_datas[i].dogId > highestId)
-      highestId = stored_datas[i].dogId + 1
+    if(stored_datas[i].dogId > uniqueId)
+      uniqueId = stored_datas[i].dogId + 1
     
   }
-  console.log("Högsta ID")
-  console.log(highestId)
 
-
-
-
-
-    const newObject =             {
-        "name": "Fidoran",
-        "nick": "fidde",
-        "age": 4,
-        "bio": "",
-        "home": "false",
-        "friendList": [],
-        "img": ""
-
+    const newObject =             
+    {
+        "home": false,
+        "friendList": []
     }
 
     if (!url) {
@@ -49,11 +39,10 @@ export const CreateView = () => {
         })
         .catch(console.log);
     }
-    
-
+  
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        newObject.dogId = highestId
+        newObject.dogId = uniqueId
         newObject.name = name
         newObject.nick = nick
         newObject.age = age
@@ -65,8 +54,6 @@ export const CreateView = () => {
 
         history.push(`/`);
     }
-
-    console.log(stored_datas)
 
     return (
         <>

@@ -2,14 +2,15 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 export const ProfileView = () => {
+
   const history = useHistory();
 
   var stored_datas = JSON.parse(localStorage["datas"]);
 
+  //Använd hundnamnet i URL:en för att veta vilken hund som ska visas.
   var str = window.location.href;
   str = str.substring(str.indexOf("e") + 2);
 
-  //Skapa tillfälliga variabler av hundens object som skrivs ut på profilsidan
   let dogIdVar,
     nameVar,
     nickVar,
@@ -32,11 +33,12 @@ export const ProfileView = () => {
     }
   }
 
+  //Skapar en array med alla nuvarande hunds vänner
   let friendIds = friendListVar.map((item, index) =>
     stored_datas.find((x) => x.dogId === item)
   );
 
-  //Får problem om det är undefined
+  //Skapar en array med enbart vännernas ID:n.
   const friendNames = friendIds.map((item) => {
     return item.name;
   });
@@ -78,7 +80,6 @@ export const ProfileView = () => {
             {friendNames.map((item, index) => (
               <div key={index}>
                 {item}
-
                 <br />
               </div>
             ))}

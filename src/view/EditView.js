@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 export const EditView = () => {
   var stored_datas = JSON.parse(localStorage["datas"]);
 
+  const newObject = {};
+
   var str = window.location.href;
   str = str.substring(str.indexOf("w") + 2);
 
@@ -43,26 +45,22 @@ export const EditView = () => {
   const [newFriend, setNewFriend] = useState(undefined);
 
   const deleteFriend = (name) => {
-    //Ta bort vän från nuvarande profilhund
-    //Hitta Id för hund med namn
+
     let friendId = 0;
     for (var i in stored_datas) {
       if (stored_datas[i].name === name) {
         friendId = stored_datas[i].dogId;
       }
     }
-    console.log(friendId);
 
-    function remove(arrOriginal, elementToRemove) {
-      return arrOriginal.filter(function (el) {
+    function removeFriendFromArray(array, elementToRemove) {
+      return array.filter(function (el) {
         return el !== elementToRemove;
       });
     }
-    let newFriends = remove(friends, friendId);
-    setFriends(newFriends);
-    stored_datas[indexTracker].friendList = friends;
+    let newFriends = removeFriendFromArray(friends, friendId);
 
-    //Ta bort nuvarande profilhund från klickad vän
+    stored_datas[indexTracker].friendList = newFriends
 
     let clickedFriends = [];
     let indexTrackerForClickedDog;
@@ -73,12 +71,14 @@ export const EditView = () => {
       }
     }
 
-    let newFriendsForClickedDog = remove(clickedFriends, id);
+    let newFriendsForClickedDog = removeFriendFromArray(clickedFriends, id);
 
     stored_datas[indexTrackerForClickedDog].friendList =
       newFriendsForClickedDog;
 
     localStorage["datas"] = JSON.stringify(stored_datas);
+    setFriends(newFriends)
+
   };
 
   const addNewFriend = () => {
@@ -97,24 +97,14 @@ export const EditView = () => {
         }
       }
 
-      console.log("Option hund plats i array:");
-      console.log(indexTrackerForNewFriend);
-
       stored_datas[indexTracker].friendList.push(friendId);
       stored_datas[indexTrackerForNewFriend].friendList.push(id);
       localStorage["datas"] = JSON.stringify(stored_datas);
       setNewFriend(undefined);
       window.location.reload();
     }
-
-    //Hämta Id av hund som finns på adda dropdown
-
-    //Lägg till id av ny hund i nuvarande hunds lista
-
-    //Lägg till id av nuvarande hund i nya vännens vänlista
   };
 
-  const newObject = {};
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -135,20 +125,42 @@ export const EditView = () => {
     history.push(`/`);
   };
 
-  let cantAddYourself = name;
+
+
+
   let friendIds = friendListVar.map((item, index) =>
     stored_datas.find((x) => x.dogId === item)
   );
-
-  //Får problem om det är undefined
+ 
   const friendNames = friendIds.map((item) => {
     return item.name;
   });
 
+  friendIds = friendIds.map((item) => {
+    return item.dogId;
+  });
+
+    function onlyShowNewFriends(dogName) {
+      let myBool = true
+
+      if(friendNames.includes(dogName)){
+        myBool = false
+      }
+
+      if(dogName === name){
+        myBool = false
+      }
+
+      return myBool;   
+    }
+
+
+
+
   return (
     <div>
       <h1>{nameVar}'s profile</h1>
-      <img className="profileImg" src={imageVar} alt="" />
+      <img className="profileImg" src={imageVar} alt="dogimage" />
       <br />
 
       <form onSubmit={handleSubmit}>
@@ -226,15 +238,16 @@ export const EditView = () => {
                 >
                   <option value="">Add a friend</option>
 
-                  {stored_datas.map((dog, key) =>
-                    //Här har jag en ternary som ser till att man inte kan adda sig själv.
-                    cantAddYourself !== dog.name ? (
-                      <option key={key} value={dog.name}>
-                        {dog.name}
-                      </option>
-                    ) : (
-                      <br></br>
-                    )
+{stored_datas.map((dog, key) =>
+  //Här har jag en ternary som ser till att man inte kan adda sig själv.
+  onlyShowNewFriends(dog.name) ? (
+    <option key={key} value={dog.name}>
+      {dog.name}
+    </option>
+  ) : (
+    <br></br>
+  )
+
                   )}
                 </select>
               </label>
